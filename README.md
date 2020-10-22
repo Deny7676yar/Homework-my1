@@ -1,4 +1,3 @@
 # Homework-my1
-Eeeee
-1 work
-2 work
+1 my homework testing
+2 homework one on stepic
