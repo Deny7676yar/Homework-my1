@@ -1,34 +1,35 @@
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
-import math
 import time
+import math
+from selenium.webdriver.support.ui import Select
 
-def calc(x):
-  return str(math.log(abs(12*math.sin(int(x)))))
+
 
 try:
-    link = ('http://suninjuly.github.io/explicit_wait2.html')
+    link = ('http://suninjuly.github.io/selects1.html')
     browser = webdriver.Chrome()
     browser.get(link)
 
-    button = WebDriverWait(browser, 12).until(
-        EC.text_to_be_present_in_element((By.ID, "price"), '$100')
-    )
-    button = browser.find_element_by_id('book').click()
+    num1_at = browser.find_element_by_id('num1')
+    num1 = num1_at.text
+    print("valuex Yes: ", num1)
+    assert num1 is not None, "Not valuex"
 
+    num2_at = browser.find_element_by_id('num2')
+    num2 = num2_at.text
+    print("Yes: ", num2)
+    assert num2 is not None, "Not "
 
-    num_x = browser.find_element_by_id('input_value')
-    x = num_x.text
-    y = calc(x)
+    x = int(num1) + int(num2)
+    print(x)
 
-    input = browser.find_element_by_id('answer')
-    input.send_keys(y)
+    str_sum = Select(browser.find_element_by_tag_name('select'))
+    str_sum.select_by_value(str(x))
 
-    button1 = browser.find_element_by_id('solve')
-    button1.click()
+    button = browser.find_element_by_css_selector('button.btn')
+    button.click()
 
 finally:
     time.sleep(3)
     browser.quit()
+
